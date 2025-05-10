@@ -5,6 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Trash2, Pencil } from "lucide-react"
 import axios from "axios"
+import { ExportToExcel } from "@/utils/Exporttoecxel";
+
+
+
+
 
 const Myposts = () => {
     const [posts, setPosts] = useState([])
@@ -119,19 +124,25 @@ const Myposts = () => {
 
 
     return (
-        <div className="min-h-screen flex bg-white text-black">
+        <div className="min-h-screen flex bg-[#f9fafb] text-black">
             <AppSidebar />
 
             <main className="flex-1 px-6 py-10">
                 <div className="max-w-4xl mx-auto space-y-8">
+                    <h2 className="text-3xl font-bold">My Posts</h2>
                     <div className="flex justify-between items-center">
-                        <h2 className="text-3xl font-bold">My Posts</h2>
                         <Input
                             placeholder="Search your posts..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="w-64"
                         />
+                        <Button
+                            variant="outline"
+                            onClick={() => ExportToExcel(posts)}
+                        >
+                            Download Posts
+                        </Button>
                     </div>
 
                     {filteredPosts.length > 0 ? (

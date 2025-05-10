@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { HomeIcon, SearchIcon, BellIcon, PenLine, User } from "lucide-react";
+
 const AppSidebar = () => {
     return (
         <aside className="w-[250px] border-r px-6 py-4 hidden md:flex flex-col gap-6 sticky top-0 h-screen">
@@ -37,7 +36,7 @@ const AppSidebar = () => {
             </nav>
 
             <Button
-                className="w-full rounded-full mt-auto"
+                className="w-full rounded-full mb-auto"
                 onClick={() => {
                     if (window.confirm("Are you sure you want to log out?")) {
                         localStorage.removeItem("token");

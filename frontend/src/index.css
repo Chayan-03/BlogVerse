@@ -73,7 +73,6 @@ button:focus-visible {
 } */
 
 
-
 @theme inline {
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -282,9 +281,13 @@ button:focus-visible {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
   }
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
   }
 }
 

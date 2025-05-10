@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Input } from "@/components/ui/input";
+import {Input}  from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+
 
 const EditPost = () => {
   const { id } = useParams(); // post ID from route

@@ -12,22 +12,20 @@ const app = express();
 app.use(express.json());
 app.use(express.json());
 
-// Enable CORS for your frontend (localhost:5173)
+
 const corsOptions = {
-  origin: "http://localhost:5173", // Replace with your frontend URL
+  origin: "http://localhost:5173", 
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.use(cors(corsOptions)); // Use CORS middleware
+app.use(cors(corsOptions)); 
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGODB_URL, { dbName: 'blog_mern' })
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.log("not connect ted to Databse - ", err));
 
-
-
-
+// Enpoint to viewPosts 
 app.post('/viewposts', verifytoken, async (req, res) => {
     const { email } = req.body;
     try {
@@ -43,7 +41,7 @@ app.post('/viewposts', verifytoken, async (req, res) => {
     }
 })
 
-
+//endpoint to Submit the blog
 app.post('/submitblog',verifytoken, async (req, res) => {
     try {
         const { title, content ,email } = req.body;
@@ -53,9 +51,6 @@ app.post('/submitblog',verifytoken, async (req, res) => {
         if (!['Positive', 'Neutral', 'Negative'].includes(sentiment)) {
             return res.status(400).json({ message: 'Could not determine sentiment' });
         }
-        // if(sentiment == 'Negative'){
-        //     return res.status(400).json({ message: 'The Blog Does not seems appropriate for the platform and for other viewers' });
-        // }
         
         else{
         const newBlog = new Blog({
@@ -72,14 +67,8 @@ app.post('/submitblog',verifytoken, async (req, res) => {
     }
 });
 
-app.post('/checkblogs', (req,res)=>{
-    //here the blog or text will go to gemini api and the response from gemini api will be sent to the client
-    //and the response will be stored in the database
 
-    const { text } = req.body;
-
-})
-
+//endpoint to register the user
 app.post('/register', async (req, res) => {
     try {
         const { name, email, password, bio } = req.body;
@@ -105,6 +94,8 @@ app.post('/register', async (req, res) => {
     }
 })
 
+
+//endpoint to login the user
 app.post('/login',  async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -126,7 +117,10 @@ app.post('/login',  async (req, res) => {
     }
 
 })
-//endpoint for deleting the blogsa as  - 
+
+
+
+//endpoint for deleting the blogs
 app.delete('/deletepost/:id', verifytoken, async (req, res) => {
     const blogId = req.params.id;
     const userEmail = req.body.email; 
@@ -176,30 +170,9 @@ app.put('/editpost/:id', verifytoken, async (req, res) => {
     }
 });
 
-// app.get('/exploreposts', verifytoken, async (req, res) => {
-//     const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit 10 posts
-
-//     try {
-//         // Fetch posts with pagination
-//         const posts = await Blog.find()
-//             .skip((page - 1) * limit)  // Skip the number of posts for the current page
-//             .limit(Number(limit));     // Limit the number of posts per page
-
-//         const totalPosts = await Blog.countDocuments(); // Get the total number of posts
-
-//         res.json({
-//             blogs: posts,
-//             totalPosts,
-//             totalPages: Math.ceil(totalPosts / limit), // Calculate the total pages
-//             currentPage: Number(page),
-//         });
-//     } catch (error) {
-//         console.error("Error fetching posts:", error);
-//         res.status(500).json({ message: "Error fetching posts" });
-//     }
-// });
 
 
+//endpoint to fetch all posts for exploration
 app.get('/exploreposts', verifytoken, async (req, res) => {
     const userEmail = req.user.email; // From decoded token via verifytoken
 

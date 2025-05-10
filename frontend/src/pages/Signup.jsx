@@ -61,6 +61,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import animationData from "@/assets/animations/signin_animation.json";
+import Lottie from "lottie-react";
+
+
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -112,86 +116,176 @@ const Signup = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
-                <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-                    Create an Account
-                </h2>
 
-                {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+        // <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        //     <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
+        //         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        //             Create an Account
+        //         </h2>
 
-                <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div>
-                        <Label htmlFor="name">Full Name</Label>
-                        <Input
-                            id="name"
-                            type="text"
-                            placeholder="John Doe"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+        //         {error && <p className="text-sm text-red-500 text-center">{error}</p>}
 
-                    <div>
-                        <Label htmlFor="username">Username</Label>
-                        <Input
-                            id="username"
-                            type="text"
-                            placeholder="johndoe123"
-                            value={formData.username}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+        //         <form className="space-y-5" onSubmit={handleSubmit}>
+        //             <div>
+        //                 <Label htmlFor="name">Full Name</Label>
+        //                 <Input
+        //                     id="name"
+        //                     type="text"
+        //                     placeholder="John Doe"
+        //                     value={formData.name}
+        //                     onChange={handleChange}
+        //                     required
+        //                 />
+        //             </div>
 
-                    <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="you@example.com"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+        //             <div>
+        //                 <Label htmlFor="username">Username</Label>
+        //                 <Input
+        //                     id="username"
+        //                     type="text"
+        //                     placeholder="johndoe123"
+        //                     value={formData.username}
+        //                     onChange={handleChange}
+        //                     required
+        //                 />
+        //             </div>
 
-                    <div>
-                        <Label htmlFor="password">Password</Label>
-                        <Input
-                            id="password"
-                            type="password"
-                            placeholder="••••••••"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+        //             <div>
+        //                 <Label htmlFor="email">Email</Label>
+        //                 <Input
+        //                     id="email"
+        //                     type="email"
+        //                     placeholder="you@example.com"
+        //                     value={formData.email}
+        //                     onChange={handleChange}
+        //                     required
+        //                 />
+        //             </div>
 
-                    <div>
-                        <Label htmlFor="confirmPassword">Confirm Password</Label>
-                        <Input
-                            id="confirmPassword"
-                            type="password"
-                            placeholder="••••••••"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+        //             <div>
+        //                 <Label htmlFor="password">Password</Label>
+        //                 <Input
+        //                     id="password"
+        //                     type="password"
+        //                     placeholder="••••••••"
+        //                     value={formData.password}
+        //                     onChange={handleChange}
+        //                     required
+        //                 />
+        //             </div>
 
-                    <Button type="submit" className="w-full mt-2">
-                        Sign Up
-                    </Button>
-                </form>
+        //             <div>
+        //                 <Label htmlFor="confirmPassword">Confirm Password</Label>
+        //                 <Input
+        //                     id="confirmPassword"
+        //                     type="password"
+        //                     placeholder="••••••••"
+        //                     value={formData.confirmPassword}
+        //                     onChange={handleChange}
+        //                     required
+        //                 />
+        //             </div>
 
-                <p className="text-sm text-center text-gray-500 mt-6">
-                    Already have an account?{" "}
-                    <a href="/signin" className="text-blue-600 hover:underline">
-                        Sign in here
-                    </a>
-                </p>
+        //             <Button type="submit" className="w-full mt-2">
+        //                 Sign Up
+        //             </Button>
+        //         </form>
+
+        //         <p className="text-sm text-center text-gray-500 mt-6">
+        //             Already have an account?{" "}
+        //             <a href="/signin" className="text-blue-600 hover:underline">
+        //                 Sign in here
+        //             </a>
+        //         </p>
+        //     </div>
+        // </div>
+        <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gray-100 px-4">
+            {/* Left - Form */}
+            <div className="hidden lg:flex items-center justify-center w-full lg:w-1/2 bg-gray-100">
+                <Lottie animationData={animationData} loop autoplay className="w-3/4 h-auto" />
+            </div>
+            {/* Right - Form */}
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 lg:w-1/2 p-8 lg:p-0">
+                <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
+                    <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+                        Create an Account
+                    </h2>
+
+                    {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+
+                    <form className="space-y-5" onSubmit={handleSubmit}>
+                        <div>
+                            <Label htmlFor="name">Full Name</Label>
+                            <Input
+                                id="name"
+                                type="text"
+                                placeholder="John Doe"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <Label htmlFor="username">Username</Label>
+                            <Input
+                                id="username"
+                                type="text"
+                                placeholder="johndoe123"
+                                value={formData.username}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                placeholder="••••••••"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <Label htmlFor="confirmPassword">Confirm Password</Label>
+                            <Input
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="••••••••"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <Button type="submit" className="w-full mt-2">
+                            Sign Up
+                        </Button>
+                    </form>
+
+                    <p className="text-sm text-center text-gray-500 mt-6">
+                        Already have an account?{" "}
+                        <a href="/signin" className="text-blue-600 hover:underline">
+                            Sign in here
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     );

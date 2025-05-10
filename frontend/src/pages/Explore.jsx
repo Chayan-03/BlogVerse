@@ -1,10 +1,16 @@
 import React from 'react'
 import AppSidebar from '@/Helpers/AppSidebar'
+
+
+
+
+
+
 const Explore = () => {
   return (
     <div className="min-h-screen flex bg-white text-black p-0 ">
     {/* Left Sidebar */}
-    <AppSidebar/>
+    {/* <AppSidebar/> */}
     {/* Main Contebnt */}
     Explore 
 </div>

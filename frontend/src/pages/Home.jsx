@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { HomeIcon, SearchIcon, BellIcon, PenLine, User } from "lucide-react";
 import AppSidebar from "@/Helpers/AppSidebar";
+import RightSidebar from "@/Helpers/RightSidebar";
 import axios from "axios";
 
 export default function Home() {
@@ -40,7 +41,8 @@ export default function Home() {
 
 
     return (
-        <div className="min-h-screen flex bg-white text-black p-0">
+        
+        <div className="min-h-screen flex bg-[#f9fafb] text-black p-0">
             {/* Left Sidebar */}
             <AppSidebar />
 
@@ -49,7 +51,7 @@ export default function Home() {
                 <h2 className="text-2xl font-bold mb-4">Home</h2>
 
                 {/* Blog Post Composer */}
-                <div className="bg-gray-100 rounded-xl p-4 mb-6">
+                {/* <div className="bg-gray-100 rounded-xl p-4 mb-6">
                     <div className="flex gap-4 items-center mb-2">
                         <Avatar>
                             <AvatarFallback>U</AvatarFallback>
@@ -57,7 +59,7 @@ export default function Home() {
                         <Input placeholder="What's on your mind?" />
                     </div>
                     <Button className="ml-auto mt-2 rounded-full">Post</Button>
-                </div>
+                </div> */}
 
                 {/* Blog Feed */}
                 <div className="space-y-6">
@@ -99,28 +101,10 @@ export default function Home() {
                         ))
                     )}
                 </div>
-
-
-
-
             </main>
-
             {/* Right Sidebar */}
-            <aside className="w-[300px] hidden lg:block px-6 py-4 space-y-6">
-                <div>
-                    <Input placeholder="Search blogs..." />
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-xl shadow-sm">
-                    <h4 className="font-semibold mb-3">Trending Topics</h4>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                        <li>#AI</li>
-                        <li>#Tech</li>
-                        <li>#PersonalGrowth</li>
-                        <li>#Coding</li>
-                    </ul>
-                </div>
-            </aside>
+            <RightSidebar/>
         </div>
+        
     );
 }
