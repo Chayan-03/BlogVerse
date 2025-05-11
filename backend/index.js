@@ -14,7 +14,7 @@ app.use(express.json());
 
 
 const corsOptions = {
-  origin: "https://blogverse-eight.vercel.app/", 
+  origin: "https://blogverse-eight.vercel.app", 
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
