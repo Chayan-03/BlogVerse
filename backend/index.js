@@ -19,7 +19,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions)); 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGODB_URL, { dbName: 'blog_mern' })
     .then(() => console.log('Connected to MongoDB'))
@@ -189,6 +189,6 @@ app.get('/exploreposts', verifytoken, async (req, res) => {
 
 
 
-app.listen(process.env.PORT || 5000,'0.0.0.0', () => {
+app.listen(PORT,'0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 })
