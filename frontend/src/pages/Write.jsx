@@ -32,7 +32,7 @@ const Write = () => {
         try {
 
             const res = await axios.post(
-                "http://localhost:3000/submitblog",  // ✅ correct endpoint
+                `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/submitblog`,  // ✅ correct endpoint
                 contentdata,
                 {
                     headers: {

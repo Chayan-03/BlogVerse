@@ -18,7 +18,7 @@ export default function Home() {
                 const token = localStorage.getItem("token");
                 const userEmail = localStorage.getItem("email");
 
-                const res = await axios.get("http://localhost:3000/exploreposts", {
+                const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/exploreposts`, {
                     headers: {
                         Authorization: token,
                     },

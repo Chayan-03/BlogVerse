@@ -14,7 +14,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/viewposts/${id}`, {
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/viewposts/${id}`, {
           headers: {
             Authorization: `${localStorage.getItem("token")}`
           }
@@ -34,7 +34,7 @@ const EditPost = () => {
     try {
       const email = localStorage.getItem("email");
       await axios.put(
-        `http://localhost:3000/editpost/${id}`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/editpost/${id}`,
         { title, content, email },
         {
           headers: {

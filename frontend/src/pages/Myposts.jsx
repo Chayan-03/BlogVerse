@@ -29,7 +29,7 @@ const Myposts = () => {
                 const email = localStorage.getItem("email");
 
                 const res = await axios.post(
-                    "http://localhost:3000/viewposts",
+                    `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/viewposts`,
                     { email },
                     {
                         headers: {
@@ -62,7 +62,7 @@ const Myposts = () => {
         if (!confirmed) return;
 
         try {
-            const res = axios.delete(`http://localhost:3000/deletepost/${id}`, {
+            const res = axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/deletepost/${id}`, {
                 headers: {
                     Authorization: `${localStorage.getItem("token")}`
                 },
@@ -95,7 +95,7 @@ const Myposts = () => {
         try {
             const email = localStorage.getItem("email"); // Get the email from local storage
             const res = await axios.put(
-                `http://localhost:3000/editpost/${postToEdit._id}`,
+                `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/editpost/${postToEdit._id}`,
                 {
                     title: updatedTitle,
                     content: updatedContent,

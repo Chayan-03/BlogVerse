@@ -110,10 +110,11 @@ const Signin = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:3000/login`, {
+      const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
