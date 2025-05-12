@@ -1,6 +1,6 @@
 # BlogVerse - A Full-Stack Blogging Platform ✍️
 
-![BlogVerse Banner](https://via.placeholder.com/1200x400.png?text=BlogVerse+Banner)
+
 
 ## Overview
 
@@ -59,16 +59,7 @@ The app uses the **MVC pattern**:
 - The backend processes requests, interacts with MongoDB, and returns JSON responses.
 - JWT tokens are used for secure authentication and authorization.
 
-## 🖥️ Screenshots
 
-### Home Page
-![Home Page](https://via.placeholder.com/800x400.png?text=BlogVerse+Home+Page)
-
-### Write Blog
-![Write Blog](https://via.placeholder.com/800x400.png?text=BlogVerse+Write+Blog)
-
-### My Posts
-![My Posts](https://via.placeholder.com/800x400.png?text=BlogVerse+My+Posts)
 
 ## ⚙️ Installation & Setup
 
@@ -156,15 +147,6 @@ The app uses the **MVC pattern**:
 - **Markdown Support**: Integrate a markdown editor for blog content.
 - **Recommendations**: Suggest posts based on user interests.
 
-## 🤝 Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes. Ensure your code follows the project’s style guidelines.
 
-## 📧 Contact
-For any inquiries, reach out to me at [chayankhetan36@gmail.com](mailto:chayankhetan36@gmail.com).
 
-## 📜 License
-This project is licensed under the MIT License.
 
----
-
-**Made with ❤️ by Chayan Khetan**
