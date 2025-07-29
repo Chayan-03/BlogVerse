@@ -1,25 +1,59 @@
+// import mongoose from 'mongoose';
+//
+//
+// const UserModel = new mongoose.Schema({
+//     name :{
+//         type: String,
+//         required:true
+//     },
+//     email:{
+//         type: String,
+//         required:true,
+//         unique:true,
+//     },
+//     password:{
+//         type: String,
+//         required:true
+//     },
+//     bio:{
+//         type: String,
+//         default:''
+//     }
+//
+// })
+// const User = mongoose.model('User', UserModel,'users');
+// export default User;
+
+
 import mongoose from 'mongoose';
 
-
 const UserModel = new mongoose.Schema({
-    name :{
+    name: {
         type: String,
-        required:true
+        required: true
     },
-    email:{
+    email: {
         type: String,
-        required:true,
-        unique:true,
+        required: true,
+        unique: true,
     },
-    password:{
+    password: {
         type: String,
-        required:true
+        required: true
     },
-    bio:{
+    bio: {
         type: String,
-        default:''
+        default: ''
+    },
+    // Add this field for profile pictures
+    profileImage: {
+        type: String,
+        default: ''
     }
-    
-})
-const User = mongoose.model('User', UserModel,'users');
+}, {
+    // Add this option to automatically manage createdAt and updatedAt
+    timestamps: true
+});
+
+const User = mongoose.model('User', UserModel, 'users');
 export default User;
