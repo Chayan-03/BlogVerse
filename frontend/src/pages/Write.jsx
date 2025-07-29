@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 import axios from "axios"
+
 const Write = () => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
@@ -19,20 +20,16 @@ const Write = () => {
 
         const token = localStorage.getItem("token")
         const email = localStorage.getItem("email") // <-- user email must be included
-        
-
-       
         const contentdata = {
             title,
             content,
-            email, // <-- include email
+            email,
         }
-        
 
         try {
 
             const res = await axios.post(
-                `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/submitblog`,  // ✅ correct endpoint
+                `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/submitblog`,
                 contentdata,
                 {
                     headers: {

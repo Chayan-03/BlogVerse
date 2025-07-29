@@ -1,118 +1,26 @@
-
-// // export default Signin
-// import React, { useState } from 'react';
-// import { Label } from "@/components/ui/label";
-// import { Input } from "@/components/ui/input";
-// import { Button } from '@/components/ui/button';
-// import { useNavigate } from 'react-router-dom';
-
-// const Signin = () => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await fetch(`http://localhost:3000/login`, {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ email, password }),
-//       });
-
-//       const data = await res.json();
-      
-
-//       if (!res.ok) {
-//         alert(data.message || "Login failed");
-//         return;
-//       }
-
-//       // Save JWT to localStorage
-//       localStorage.setItem("token", data.jwt);
-//       localStorage.setItem("email", email); // Optional: for use in blog submissions, etc.
-
-//       // Redirect to profile or homepage
-//       navigate("/"); // or "/home", adjust as needed
-//     } catch (err) {
-//       console.error(err);
-//       alert("Something went wrong during sign in.",err);
-//     }
-//   };
-
-//   return (
-    // <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-    //   <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
-    //     <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-    //       Sign In to Your Account
-    //     </h2>
-
-    //     <form className="space-y-6" onSubmit={handleSubmit}>
-    //       <div>
-    //         <Label htmlFor="email">Email</Label>
-    //         <Input
-    //           id="email"
-    //           type="email"
-    //           placeholder="you@example.com"
-    //           className="mt-1"
-    //           required
-    //           value={email}
-    //           onChange={(e) => setEmail(e.target.value)}
-    //         />
-    //       </div>
-
-    //       <div>
-    //         <Label htmlFor="password">Password</Label>
-    //         <Input
-    //           id="password"
-    //           type="password"
-    //           placeholder="••••••••"
-    //           className="mt-1"
-    //           required
-    //           value={password}
-    //           onChange={(e) => setPassword(e.target.value)}
-    //         />
-    //       </div>
-
-    //       <Button type="submit" className="w-full mt-4">
-    //         Sign In
-    //       </Button>
-    //     </form>
-
-    //     <p className="text-sm text-center text-gray-500 mt-6">
-    //       Don't have an account?{" "}
-    //       <a href="/signup" className="text-blue-600 hover:underline">
-    //         Sign up here
-    //       </a>
-    //     </p>
-    //   </div>
-    // </div>
-//   );
-// };
-
-// export default Signin;
-
-
-
-
 import React, { useState } from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from 'react-router-dom';
-import Lottie from "lottie-react";
+import { Link, useNavigate } from 'react-router-dom';
 import animationData from "@/assets/animations/signin_animation.json";
+import { Loader2, AlertCircle } from 'lucide-react';
+import AuthLayout from '@/components/AuthLayout';
 
-import { useEffect } from 'react';  
+
 
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(''); // State for error messages
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(''); // Clear previous errors on a new submission
+
     try {
       const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/login`, {
         method: "POST",
@@ -123,7 +31,8 @@ const Signin = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Login failed");
+        // Instead of alert, set the error state
+        setError(data.message || "Login failed. Please check your credentials.");
         return;
       }
 
@@ -132,112 +41,70 @@ const Signin = () => {
       navigate("/");
     } catch (err) {
       console.error(err);
-      alert("Something went wrong during sign in.");
+      // Set a generic error message for network or other issues
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gray-100 m-20px-4">
-      {/* Left - Form */}
-      <div className="hidden lg:flex items-center justify-center w-full lg:w-1/2 bg-gray-100">
-        <Lottie animationData={animationData} loop autoplay className="w-3/4 h-auto" />
-      </div>
-      
-
-      {/* Right - Form */}
-      <div className=" min-h-screen flex items-center justify-center bg-gray-100 px-0 lg:w-1/2 p-8 lg:p-0">
-      <div className="w-full max-w-md  bg-white p-10 rounded-2xl shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Sign In to Your Account
-        </h2>
-
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              className="mt-1"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+      <AuthLayout animationData={animationData}>
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-blue-600 mb-2">BlogVerse</h1>
+            <h2 className="text-2xl font-semibold text-gray-800">Sign In to Your Account</h2>
+            <p className="text-gray-500 mt-1">Welcome back! Please enter your details.</p>
           </div>
 
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              className="mt-1"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Conditionally render the error message */}
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5" />
+                  <span className="block sm:inline">{error}</span>
+                </div>
+            )}
 
-          <Button type="submit" className="w-full mt-4">
-            Sign In
-          </Button>
-        </form>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={loading}
+              />
+            </div>
 
-        <p className="text-sm text-center text-gray-500 mt-6">
-          Don't have an account?{" "}
-          <a href="/signup" className="text-blue-600 hover:underline">
-            Sign up here
-          </a>
-        </p>
-      </div>
-    </div>
-    
-      {/* <div className="w-[100px] lg:w-1/2 p-8 lg:p-16 bg-white shadow-xl rounded-none lg:rounded-l-2xl z-10 ">
-      <div className='  items-center justify-center  px-4'>
-        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center lg:text-left">
-          Sign In to Your Account
-        </h2>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
+              />
+            </div>
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+            <Button type="submit" className="w-full py-3" disabled={loading}>
+              {loading ? <Loader2 className="animate-spin" /> : "Sign In"}
+            </Button>
+          </form>
 
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <Button type="submit" className="w-full mt-4">
-            Sign In
-          </Button>
-        </form>
-
-        <p className="text-sm text-center text-gray-500 mt-6">
-          Don't have an account?{" "}
-          <a href="/signup" className="text-blue-600 hover:underline">
-            Sign up here
-          </a>
-        </p>
-      </div>
-      </div> */}
-      
-    </div> 
+          <p className="text-sm text-center text-gray-500 mt-8">
+            Don't have an account?{" "}
+            <Link to="/signup" className="font-semibold text-blue-600 hover:underline">
+              Sign up here
+            </Link>
+          </p>
+        </div>
+      </AuthLayout>
   );
 };
 
